@@ -27,3 +27,16 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
+class Contacts(models.Model):
+    address = models.CharField(max_length=255, verbose_name='Адрес')
+    phone = models.CharField(max_length=50, verbose_name='Телефон')
+    working_hours = models.CharField(max_length=50, verbose_name='Рабочие часы')
+    instagram = models.URLField(blank=True, verbose_name='Инстаграм')
+    instagram = models.URLField(blank=True, verbose_name='Телеграмм')
+
+    class Meta:
+        verbose_name = 'Контакт'
+        verbose_name_plural = 'Контакты'
+
+    def __str__(self):
+        return self.address
