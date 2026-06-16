@@ -20,7 +20,7 @@
 
 1. Клонировать репозиторий:
 ```bash
-git clone [https://github.com/твой_ник/CinemaWorld.git](https://github.com/твой_ник/CinemaWorld.git)
+git clone [https://github.com/yatoo8/CinemaWorld.git](https://github.com/yatoo8/CinemaWorld.git)
 cd CinemaWorld
 
 # Как запустить
