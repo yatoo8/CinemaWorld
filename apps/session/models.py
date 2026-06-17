@@ -20,4 +20,4 @@ class Session(models.Model):
         verbose_name_plural = 'Сеансы'
 
     def __str__(self):
-        return self.movie
+        return f'{self.movie.title} | {self.data} {self.time}'

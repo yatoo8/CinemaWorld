@@ -1,0 +1,15 @@
+.list-items{
+    font-size: 25px;
+}
+body {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: rgb(0, 0, 0);
+}
+.posters{
+    transition: transform 0.15s ease-in-out;
+}
+.posters:hover{
+    transform: scale(1.05);
+}

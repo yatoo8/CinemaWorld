@@ -1,8 +1,103 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container">
-    <div class="col-12">
-        <p style="background-color: red;">hahahha</p>
+{% include "includes/header.html" %}
+
+<!-- POSTER START-->
+<div class="row g-3 p-3">
+    {% for movie in movies %}
+    <div class="posters col-6 col-md-4 col-lg-3">
+        <div class="card bg-dark text-white h-100">
+            <img src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}">
+            <div class="card-body">
+                <h6 class="card-title">{{ movie.title }}</h6>
+                <p style="color: rgb(120, 117, 125) !important;" class="card-text text-muted small">{{ movie.genre }} •
+                    {{ movie.age_limit }}+</p>
+                <a href="{% url 'movie_detail' movie.slug %}" class="btn btn-danger btn-sm w-100">Расписание</a>
+            </div>
+        </div>
     </div>
+    {% endfor %}
 </div>
+<!-- POSTER END -->
+
+<hr style="background-color: red;" class="border border-dark border-3 opacity-100">
+
+<!-- SHOWING TEXT START -->
+<div class="showing text-center my-4">
+    <div class="mx-auto" style="width: 200px; height: 3px; background: rgb(168, 49, 49); border-radius: 2px;"></div>
+    <h2 class="text-danger fw-bold">В <span class="text-danger">прокате</span></h2>
+    <div class="mx-auto" style="width: 140px; height: 3px; background: rgb(168, 38, 38); border-radius: 2px;"></div>
+</div>
+<!-- SHOWING TEXT END-->
+
+ <!-- SHOWING SESSIONS START -->
+<div class="sessions">
+    {% for movie in movies %}
+    {% if movie.session_set.all %}
+    <div class="d-flex gap-3 p-2 mb-3 bg-dark text-white rounded">
+
+        <!-- Фото слева -->
+        <img src="{{ movie.poster.url}}" alt="{{ session.movie.title }}"
+            style="width: 200px; height: 250px; object-fit: cover; border-radius: 6px;">
+
+        <!-- Данные справа -->
+        <div class="flex-grow-1 pt-1">
+            <h5 class="mb-1">{{ movie.title }}</h5>
+            <div class="d-flex gap-2 align-items-center mb-2">
+                <span class="badge bg-danger">{{ movie.age_limit }}+</span>
+                <span  class="text-warning small">{{movie.genre}}</span>
+            </div>
+            <hr class="border-secondary my-1">
+            <div class="d-flex gap-3 flex-wrap mt-2">
+                {% for session in movie.session_set.all %}
+                <div class="d-flex flex-column">
+                    <span class="text-white small">{{ session.hall.title }}</span>
+                    <div class="d-flex align-items-baseline gap-1">
+                        <span style="color: rgb(192, 67, 67);">{{ session.time }}</span>
+                        <span class="badge bg-danger">{{ session.price }} С</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+ <!-- SHOWING SESSIONS END -->
+
+<hr style="background-color: red;" class="border border-dark border-3 opacity-100">
+
+<!-- PREMIERES TEXT START -->
+<div class="premieres text-center my-4">
+    <div class="mx-auto" style="width: 200px; height: 3px; background: rgb(168, 38, 38); border-radius: 2px;"></div>
+    <h2 class="text-danger fw-bold">Предстоящие <span class="text-danger">премьеры</span></h2>
+    <div class="mx-auto" style="width: 140px; height: 3px; background: rgb(168, 38, 38); border-radius: 2px;"></div>
+</div>
+<!-- PREMIERES TEXT END -->
+
+<!-- PREMIERES  START  -->
+<div class="upcoming-premieres">
+    {% for movie in movies_soon %}
+    <div class="d-flex gap-3 p-2 mb-3 bg-dark text-white rounded">
+
+        <!-- Фото слева -->
+        <img src="{{ movie.poster.url}}" alt="{{ session.movie.title }}"
+            style="width: 200px; height: 250px; object-fit: cover; border-radius: 6px;">
+
+        <!-- Данные справа -->
+        <div class="flex-grow-1 pt-1">
+            <h5 class="mb-1">{{ movie.title }}</h5>
+            <div class="d-flex gap-2 align-items-center mb-2">
+                <span class="badge bg-danger">{{ movie.age_limit }}+</span>
+                <span class="text-warning small">{{movie.genre}}</span>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+<!-- PREMIERES  END -->
+
 {% endblock content %}

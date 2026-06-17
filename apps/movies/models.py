@@ -32,7 +32,7 @@ class Contacts(models.Model):
     phone = models.CharField(max_length=50, verbose_name='Телефон')
     working_hours = models.CharField(max_length=50, verbose_name='Рабочие часы')
     instagram = models.URLField(blank=True, verbose_name='Инстаграм')
-    instagram = models.URLField(blank=True, verbose_name='Телеграмм')
+    telegram = models.URLField(blank=True, verbose_name='Телеграмм')
 
     class Meta:
         verbose_name = 'Контакт'

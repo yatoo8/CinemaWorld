@@ -10,7 +10,12 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
          
-        context['movies'] = Movie.objects.all()
+        context['movies'] = Movie.objects.prefetch_related('session_set')
+        context['movies_showing'] = Movie.objects.filter(status='showing').prefetch_related('session_set')
+        context['movies_soon'] = Movie.objects.filter(status='soon').prefetch_related('session_set')
+        context['movies_archive'] = Movie.objects.filter(status='archive').prefetch_related('session_set')
+
+
         context['promotions'] = Promotion.objects.all()
         context['sessions'] = Session.objects.select_related(
             'movie', 'hall'
