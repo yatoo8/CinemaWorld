@@ -7,9 +7,9 @@
     {% for movie in movies %}
     <div class="posters col-6 col-md-4 col-lg-3">
         <div class="card bg-dark text-white h-100">
-            <img  src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}">
+            <a href="{% url 'movie_detail' movie.slug %}"><img  src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}"></a>
             <div class="card-body">
-                <h6 class="card-title">{{ movie.title }}</h6>
+                <a class=" text-decoration-none text-white" href="{% url 'movie_detail' movie.slug %}"><h6 class="card-title">{{ movie.title }}</h6></a>
                 <p style="color: rgb(120, 117, 125) !important;" class="card-text text-muted small">{{ movie.genre }} •
                     {{ movie.age_limit }}+</p>
                 <a href="{% url 'movie_detail' movie.slug %}" class="btn btn-danger btn-sm w-100">Расписание</a>
@@ -36,8 +36,8 @@
     <div class="d-flex gap-3 p-2 mb-3 bg-dark text-white rounded">
 
         <!-- Фото слева -->
-        <img src="{{ movie.poster.url}}" alt="{{ session.movie.title }}"
-            style="width: 200px; height: 250px; object-fit: cover; border-radius: 6px;">
+        <a href="{% url 'movie_detail' movie.slug %}"><img src="{{ movie.poster.url}}" alt="{{ session.movie.title }}"
+            style="width: 200px; height: 250px; object-fit: cover; border-radius: 6px;"></a>
 
         <!-- Данные справа -->
         <div class="flex-grow-1 pt-1">
@@ -47,16 +47,18 @@
                 <span  class="text-warning small">{{movie.genre}}</span>
             </div>
             <hr class="border-secondary my-1">
-            <div class="d-flex gap-3 flex-wrap mt-2">
-                {% for session in movie.session_set.all %}
-                <div class="d-flex flex-column">
-                    <span class="text-white small">{{ session.hall.title }}</span>
-                    <div class="d-flex align-items-baseline gap-1">
-                        <span style="color: rgb(192, 67, 67);">{{ session.time }}</span>
-                        <span class="badge bg-danger">{{ session.price }} С</span>
-                    </div>
+            <div class="d-flex gap-3 flex-wrap mt-2 ">
+                <div class="d-flex gap-3">
+                    {% for session in movie.session_set.all %}
+                    <a href="#" class="btn btn-outline-danger">
+                        <div class="container"><span class="text-success fw-bold">{{ session.hall.get_hall_type_display }}</span></div>
+                        {{ session.time|date:"H:i" }}
+                        <small class="d-block text-warning">{{ session.price }} сом</small>
+                    </a>
+                    {% empty %}
+                    <p class="text-white">Сеансов нет.</p>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </div>
 

@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from apps.movies.models import Movie, Contacts
@@ -15,7 +16,6 @@ class HomeView(TemplateView):
         context['movies_soon'] = Movie.objects.filter(status='soon').prefetch_related('session_set')[:3]
         context['movies_archive'] = Movie.objects.filter(status='archive').prefetch_related('session_set')[:3]
 
-        context['contacts'] = Contacts.objects.first()
         context['promotions'] = Promotion.objects.all()
         context['sessions'] = Session.objects.select_related(
             'movie', 'hall'

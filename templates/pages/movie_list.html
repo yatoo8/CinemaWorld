@@ -16,7 +16,7 @@
     {% for movie in movies_showing %}
     <div class="posters col-6 col-md-4 col-lg-3">
         <div class="card bg-dark text-white h-100">
-            <img style="height: 300px; object-fit:cover;" src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}">
+            <a href="{% url 'movie_detail' movie.slug %}"><img style="height: 300px; object-fit:cover;" src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}"></a>
             <div class="card-body">
                 <h6 class="card-title">{{ movie.title }}</h6>
                 <p style="color: rgb(120, 117, 125) !important;" class="card-text text-muted small">{{ movie.genre }} •

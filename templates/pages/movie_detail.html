@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'includes/header.html' %}
+
+<div class="container">
+    <div class="poster mx-4 py-4 row">
+        <!-- Блок с постером -->
+        <div class="col-md-4 col-12 mb-4 mb-md-0">
+            <div class="poster-image text-center">
+                <img style="height: 600px; object-fit: cover; width: 100%; border-radius: 8px;"
+                    src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+            </div>
+        </div>
+
+        <!-- Блок с деталями фильма -->
+        <div class="col-md-7 col-12 mx-md-4">
+            <h1 class="mb-3 text-white fw-bold">{{ movie.title }}</h1>
+
+            <div class="movie-meta mb-4">
+                <p class="mb-2 text-info fw-bold"><strong>Жанр:</strong> {{ movie.genre }}</p>
+                <p class="mb-2 text-info fw-bold"><strong>Длительность:</strong> {{ movie.duration }} мин.</p>
+                <p class="mb-2 text-info fw-bold"><strong>Возрастное ограничение:</strong> <span class="badge bg-danger">{{movie.age_limit }}+</span></p>
+            </div> 
+
+            <hr>
+
+            <div class="movie-description mb-4">
+                <h3 class="text-white fw-bold" >Описание</h3>
+                <p class="text-white fw-semibold">{{ movie.description }}</p>
+            </div>
+
+            <hr style="border: 4px red;">
+
+            <div class="movie-trailer mb-4">
+                <h3 class="text-white fw-bold">Трейлер</h3>
+                {% if movie.trailer %}
+                <a href="{{ movie.trailer }}" class="btn btn-primary text-white " target="_blank">
+                    <i class="bi bi-play-fill"></i> Смотреть трейлер
+                </a>
+                {% else %}
+                <p class="text-white fw-bold">Трейлер отсутствует</p>
+                {% endif %}
+            </div>
+
+            <hr>
+
+            <!-- Расписание сеансов -->
+            <div class="movie-sessions">
+                <h3 class="text-white">Расписание сеансов</h3>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+
+                    {% for session in movie.session_set.all %}
+                    <a href="#" class="btn btn-outline-danger">
+                        {{ session.time|date:"H:i" }}
+                        <small class="d-block text-warning">{{ session.price }} сом</small>
+                    </a>
+                    {% empty %}
+                    <p class="text-white">Сеансов нет.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
+{% endblock content %}

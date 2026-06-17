@@ -14,11 +14,20 @@ body {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(16, 16, 16);
 }
 .posters{
     transition: transform 0.15s ease-in-out;
 }
 .posters:hover{
     transform: scale(1.05);
+}
+
+.footer-p{
+    transition: all 0.15s ease-in-out;
+    color: #000;
+}
+.footer-p:hover{
+    color: rgb(187, 47, 47);
+    transform: scale(1.02);
 }
