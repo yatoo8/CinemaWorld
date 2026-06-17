@@ -11,9 +11,9 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
          
         context['movies'] = Movie.objects.prefetch_related('session_set')
-        context['movies_showing'] = Movie.objects.filter(status='showing').prefetch_related('session_set')
-        context['movies_soon'] = Movie.objects.filter(status='soon').prefetch_related('session_set')
-        context['movies_archive'] = Movie.objects.filter(status='archive').prefetch_related('session_set')
+        context['movies_showing'] = Movie.objects.filter(status='showing').prefetch_related('session_set')[:3]
+        context['movies_soon'] = Movie.objects.filter(status='soon').prefetch_related('session_set')[:3]
+        context['movies_archive'] = Movie.objects.filter(status='archive').prefetch_related('session_set')[:3]
 
         context['contacts'] = Contacts.objects.first()
         context['promotions'] = Promotion.objects.all()
@@ -27,6 +27,13 @@ class MovieListView(ListView):
     model = Movie
     template_name = 'pages/movie_list.html'
     context_object_name = 'movies'
+
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["movies_soon"] = Movie.objects.filter(status='soon').prefetch_related('session_set')
+        context["movies_showing"] = Movie.objects.filter(status='showing').prefetch_related('session_set')
+        return context
+    
 
     
 

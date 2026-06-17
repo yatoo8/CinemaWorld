@@ -7,7 +7,7 @@
     {% for movie in movies %}
     <div class="posters col-6 col-md-4 col-lg-3">
         <div class="card bg-dark text-white h-100">
-            <img src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}">
+            <img  src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}">
             <div class="card-body">
                 <h6 class="card-title">{{ movie.title }}</h6>
                 <p style="color: rgb(120, 117, 125) !important;" class="card-text text-muted small">{{ movie.genre }} •
@@ -24,16 +24,15 @@
 
 <!-- SHOWING TEXT START -->
 <div class="showing text-center my-4">
-    <div class="mx-auto" style="width: 200px; height: 3px; background: rgb(168, 49, 49); border-radius: 2px;"></div>
+    <div class="mx-auto" style="width: 200px; height: 3px; background: rgb(168, 49, 49); border-radius: 2px; box-shadow: 9px 1px 12px 1px red;""></div>
     <h2 class="text-danger fw-bold">В <span class="text-danger">прокате</span></h2>
-    <div class="mx-auto" style="width: 140px; height: 3px; background: rgb(168, 38, 38); border-radius: 2px;"></div>
+    <div class="mx-auto" style="width: 140px; height: 3px; background: rgb(168, 38, 38); border-radius: 2px; box-shadow: 9px 1px 12px 1px red;""></div>
 </div>
 <!-- SHOWING TEXT END-->
 
  <!-- SHOWING SESSIONS START -->
 <div class="sessions">
-    {% for movie in movies %}
-    {% if movie.session_set.all %}
+    {% for movie in movies_showing %}
     <div class="d-flex gap-3 p-2 mb-3 bg-dark text-white rounded">
 
         <!-- Фото слева -->
@@ -62,8 +61,10 @@
         </div>
 
     </div>
-    {% endif %}
     {% endfor %}
+</div>
+<div class="text-center mt-3 mb-4">
+    <a href="{% url 'movie_list' %}" class="btn btn-outline-danger">Посмотреть дальше</a>
 </div>
  <!-- SHOWING SESSIONS END -->
 
@@ -71,9 +72,9 @@
 
 <!-- PREMIERES TEXT START -->
 <div class="premieres text-center my-4">
-    <div class="mx-auto" style="width: 200px; height: 3px; background: rgb(168, 38, 38); border-radius: 2px;"></div>
+    <div class="mx-auto" style="width: 200px; height: 3px; background: rgb(168, 38, 38); border-radius: 2px;box-shadow: 9px 1px 12px 1px red;"></div>
     <h2 class="text-danger fw-bold">Предстоящие <span class="text-danger">премьеры</span></h2>
-    <div class="mx-auto" style="width: 140px; height: 3px; background: rgb(168, 38, 38); border-radius: 2px;"></div>
+    <div class="mx-auto" style="width: 140px; height: 3px; background: rgb(168, 38, 38); border-radius: 2px;box-shadow: 9px 1px 12px 1px red;"></div>
 </div>
 <!-- PREMIERES TEXT END -->
 
@@ -97,18 +98,24 @@
     </div>
     {% endfor %}
 </div>
+<div class="text-center mt-3 mb-4">
+    <a href="{% url 'movie_list' %}" class="btn btn-outline-danger">Посмотреть дальше</a>
+</div>
 <!-- PREMIERES  END -->
 
-<div class="mt-4">
+<!-- PROMOTIONS START -->
+<div class="promotions mt-4">
     <h5 class="text-white fw-bold mb-3 text-center">Акции <span class="text-danger">и скидки</span></h5>
     {% for promotion in promotions %}
-    <div class="p-3 mb-2 rounded" style="background: #2c0000; border-left: 3px solid red;">
+    <div class="p-3 mb-2 rounded" style="background: #2c0000; border-left: 3px solid red; box-shadow: 8px 1px 170px 1px red;">
         <h6 class="text-white mb-1">{{ promotion.title }}</h6>
         <p class="text-secondary small mb-1">{{ promotion.description }}</p>
         <span class="text-danger small">До {{ promotion.valid_until }}</span>
     </div>
     {% endfor %}
 </div>
+<!-- PROMOTIONS END -->
+
 {% include "includes/footer.html" %}
 
 {% endblock content %}
