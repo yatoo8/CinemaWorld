@@ -3,20 +3,35 @@
         <div class="row">
             <div class="col-md-4">
                 <h6 class="text-danger">Кинотеатр Мир</h6>
-                <p class="text-muted small mb-1">📍 г. Бишкек, ул. Манас 1</p>
-                <p class="text-muted small mb-1">📞 +996 700 000 000</p>
-                <p class="text-muted small mb-1">🕐 Пн-Вс: 10:00 - 00:00</p>
+                <p class="text-white small mb-1">📍 {{contacts.address}}</p>
+                <p class="text-white small mb-1">📞 {{contacts.phone}}</p>
+                <p class="text-white small mb-1">🕐 Пн-Вс: {{contacts.working_hours}}0</p>
             </div>
             <div class="col-md-4">
                 <h6 class="text-danger">Навигация</h6>
-                <p class="text-muted small mb-1"><a href="/" class="text-muted text-decoration-none">Главная</a></p>
-                <p class="text-muted small mb-1"><a href="/movies/" class="text-muted text-decoration-none">Афиша</a></p>
-                <p class="text-muted small mb-1"><a href="/schedule/" class="text-muted text-decoration-none">Расписание</a></p>
+                <p class="text-white small mb-1"><a href="/" class="text-muted text-decoration-none">Главная</a></p>
+                <p class="text-white small mb-1"><a href="/movies/" class="text-muted text-decoration-none">Афиша</a>
+                </p>
+                <p class="text-white small mb-1"><a href="/schedule/"
+                        class="text-muted text-decoration-none">Расписание</a></p>
             </div>
-            <div class="col-md-4">
-                <h6 class="text-danger">Соцсети</h6>
-                <p class="text-muted small mb-1">Instagram</p>
-                <p class="text-muted small mb-1">Telegram</p>
+            <div class="col-md-4 ">
+                <h6 class="text-danger ">Соцсети</h6>
+                <a href="{{contacts.instagram}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="{{contacts.telegram}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </a>
             </div>
         </div>
         <hr class="border-secondary">
