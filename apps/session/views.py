@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from apps.halls.models import Hall
+from apps.movies.models import Movie
 from apps.session.models import Session
 from django.views.generic import ListView
 from typing import Any
 
-class SessionListView(ListView):
+class ScheduleView(ListView):
     template_name = 'pages/session_list.html'
     model = Session
     context_object_name = 'sessions'
@@ -12,6 +13,7 @@ class SessionListView(ListView):
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["halls"] = Hall.objects.all()
+        context['movies'] = Movie.objects.prefetch_related('session_set')
         return context
     
     def get_queryset(self):
@@ -29,3 +31,4 @@ class SessionListView(ListView):
         if hall_type:
             queryset = queryset.filter(hall__hall_type=hall_type)
         return queryset
+    

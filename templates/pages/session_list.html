@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'includes/header.html' %}
+
+<style>
+    .schedule-wrap {
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 0 20px;
+        font-family: sans-serif;
+        color: #fff;
+    }
+
+    .date-bar {
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #333;
+    }
+
+    .date-card {
+        text-decoration: none;
+        color: #fff;
+        padding: 10px 20px;
+        background: #222;
+        border-radius: 6px;
+        text-align: center;
+    }
+
+    /* Класс для активной (нажатой) даты */
+    .date-card.active {
+        background: #e50914;
+    }
+
+    .session-list {
+        margin-top: 30px;
+    }
+
+    .session-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #1a1a1a;
+        padding: 15px 20px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+    }
+
+    .btn-buy {
+        background: #e50914;
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="schedule-wrap">
+
+    <div class="date-bar">
+        {% for date in dates_list %}
+        <a href="?date={{ date.string }}" class="date-card {% if date.is_active %}active{% endif %}">
+            <span style="display: block; font-size: 12px;">{{ date.day_of_week }}</span>
+            <span style="display: block; font-size: 18px; font-weight: bold;">{{ date.day }}</span>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="sessions">
+        {% for movie in movies %}
+        {% if movie.session_set.all %}
+        <div class="d-flex gap-3 p-2 mb-3 bg-dark text-white rounded">
+
+            <a href="{% url 'movie_detail' movie.slug %}">
+                <img src="{{ movie.poster.url }}"
+                    style="width: 200px; height: 250px; object-fit: cover; border-radius: 6px;">
+            </a>
+
+            <div class="flex-grow-1 pt-1">
+                <h5 class="mb-1">{{ movie.title }}</h5>
+                <div class="d-flex gap-2 align-items-center mb-2">
+                    <span class="badge bg-danger">{{ movie.age_limit }}+</span>
+                    <span class="text-warning small">{{ movie.genre }}</span>
+                </div>
+                <hr class="border-secondary my-1">
+                <div class="d-flex gap-3 flex-wrap mt-2">
+                    {% for session in movie.session_set.all %}
+                    <a href="#" class="btn btn-outline-danger">
+                        <span class="text-success fw-bold d-block">{{ session.hall.get_hall_type_display }}</span>
+                        {{ session.time|date:"H:i" }}
+                        <small class="d-block text-warning">{{ session.price }} сом</small>
+                    </a>
+                    {% empty %}
+                    <p class="text-muted">Сеансов нет</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
+
+{% include 'includes/footer.html' %}
+{% endblock %}

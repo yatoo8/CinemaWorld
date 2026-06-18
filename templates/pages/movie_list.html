@@ -18,7 +18,7 @@
         <div class="card bg-dark text-white h-100">
             <a href="{% url 'movie_detail' movie.slug %}"><img style="height: 300px; object-fit:cover;" src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}"></a>
             <div class="card-body">
-                <h6 class="card-title">{{ movie.title }}</h6>
+                <a style="text-decoration: none;" href="{% url 'movie_detail' movie.slug%}"><h6 class="card-title text-white" >{{ movie.title }}</h6></a>
                 <p style="color: rgb(120, 117, 125) !important;" class="card-text text-muted small">{{ movie.genre }} •
                     {{ movie.age_limit }}+</p>
                 <a href="{% url 'movie_detail' movie.slug %}" class="btn btn-danger btn-sm w-100">Расписание</a>
@@ -37,13 +37,14 @@
 </div>
 <!-- PREMIERES TEXT END -->
 
+<!-- PREMIERES  START -->
 <div class="row g-3 p-3">
     {% for movie in movies_soon %}
     <div class="posters col-6 col-md-4 col-lg-3">
         <div class="card bg-dark text-white h-100">
-            <img style="height: 300px; object-fit:cover;" src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}">
+            <a href="{% url 'movie_detail' movie.slug %}"><img style="height: 300px; object-fit:cover;" src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}"></a>
             <div class="card-body">
-                <h6 class="card-title">{{ movie.title }}</h6>
+                <a style="text-decoration: none;" href="{% url 'movie_detail' movie.slug%}"><h6 class="card-title text-white">{{ movie.title }}</h6></a>
                 <p style="color: rgb(120, 117, 125) !important;" class="card-text text-muted small">{{ movie.genre }} •
                     {{ movie.age_limit }}+</p>
                 <a href="{% url 'movie_detail' movie.slug %}" class="btn btn-danger btn-sm w-100">Расписание</a>
@@ -52,6 +53,8 @@
     </div>
     {% endfor %}
 </div>
+<!-- PREMIERES  END -->
+
 
 {% include "includes/footer.html" %}
 {% endblock content %}
