@@ -6,7 +6,7 @@ from django.views.generic import ListView
 from typing import Any
 
 class ScheduleView(ListView):
-    template_name = 'pages/session_list.html'
+    template_name = 'pages/schedule.html'
     model = Session
     context_object_name = 'sessions'
 

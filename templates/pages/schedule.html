@@ -60,14 +60,7 @@
 
 <div class="schedule-wrap">
 
-    <div class="date-bar">
-        {% for date in dates_list %}
-        <a href="?date={{ date.string }}" class="date-card {% if date.is_active %}active{% endif %}">
-            <span style="display: block; font-size: 12px;">{{ date.day_of_week }}</span>
-            <span style="display: block; font-size: 18px; font-weight: bold;">{{ date.day }}</span>
-        </a>
-        {% endfor %}
-    </div>
+
     <div class="sessions">
         {% for movie in movies %}
         {% if movie.session_set.all %}
